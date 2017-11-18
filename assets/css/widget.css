@@ -1,0 +1,128 @@
+.hotel-special-offer table{
+    display: none;
+}
+
+.hotel-special-offer table caption{
+    border: 1px solid #19563d;
+    background-color: #19563d;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.hotel-special-offer table tr {
+    text-align: center;
+    border-bottom: none;
+}
+
+.hotel-special-offer .block {
+    border: 1px solid #19563d;
+}
+
+.hotel-special-offer .block .image {
+    padding: 10px 0 10px 10px;
+}
+
+.hotel-special-offer .block .info {
+    padding: 10px 10px 10px 0;
+    color: #19563d;
+}
+
+.hotel-special-offer .block .info h4 {
+    margin-bottom: 10px;
+    color: #19563d;
+}
+
+.hotel-special-offer .block .info h5 {
+    margin-bottom: 5px;
+    color: #19563d;
+}
+
+.hotel-special-offer .block .info td {
+    padding: 0;
+}
+
+.hotel-special-offer .block .arrival fieldset,
+.hotel-special-offer .block .departure fieldset{
+    width: 110px;
+    height: 100px;
+    color: gray;
+    border: 2px solid #19563d;
+    margin-bottom: 0;
+}
+
+.hotel-special-offer .block .arrival fieldset{
+    float: right;
+}
+
+.hotel-special-offer .block .departure fieldset{
+    float: left;
+}
+
+.hotel-special-offer .block .departure {
+    width: 0;
+    padding-left: 10px !important;
+}
+
+.hotel-special-offer .block .month{
+    font-size: 0.7rem;
+    margin: 0;
+}
+
+.hotel-special-offer .block .day{
+    font-size: 1.9rem;
+    margin: 0;
+}
+
+.hotel-special-offer .block .info .book {
+    text-align: left;
+    vertical-align: bottom;
+}
+
+.hotel-special-offer .block .info .book a {
+    color: grey;
+    box-shadow: inset 0 -1px 0 grey;
+}
+
+.loader,
+.loader:after {
+    border-radius: 50%;
+    width: 10em;
+    height: 10em;
+    display: none;
+}
+.loader {
+    margin: 60px auto;
+    font-size: 10px;
+    position: relative;
+    text-indent: -9999em;
+    border-top: 1.1em solid rgba(255, 255, 255, 0.2);
+    border-right: 1.1em solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1.1em solid rgba(255, 255, 255, 0.2);
+    border-left: 1.1em solid #19563d;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-animation: load8 1.1s infinite linear;
+    animation: load8 1.1s infinite linear;
+}
+@-webkit-keyframes load8 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+@keyframes load8 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
