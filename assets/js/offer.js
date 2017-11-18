@@ -59,14 +59,14 @@ Offer.prototype.render = function (data) {
         $arrival = this.table.find('.arrival'),
         $departure = this.table.find('.departure');
 
-    self.table.find('.hotel').text(data['hotel_name']);
-    self.table.find('.room').text(data['room_name']);
-    self.table.find('.cost-rate').text(data['cost_rate']);
+    self.table.find('.hotel').text(data['hotel_name'].toUpperCase());
+    self.table.find('.room').text(data['room_name'].toUpperCase());
+    self.table.find('.cost-rate').text(data['cost_rate'].toUpperCase());
 
-    $arrival.find('.month').text(data['arrival_month']);
+    $arrival.find('.month').text(data['arrival_month'].toUpperCase());
     $arrival.find('.day').text(data['arrival_day']);
 
-    $departure.find('.month').text(data['departure_month']);
+    $departure.find('.month').text(data['departure_month'].toUpperCase());
     $departure.find('.day').text(data['departure_day']);
 
     self.table.show();

@@ -122,9 +122,11 @@ class Hotel_Special_Offer_Widget extends WP_Widget {
 		$departure = DateTime::createFromFormat('Y-m-d', $offer['departure_date']);
 
 		$offer['arrival_month'] = __($arrival->format('F'));
-		$offer['departure_month'] = __();
+		$offer['arrival_day'] = $arrival->format('d');
+		$offer['departure_month'] = __($departure->format('F'));
+		$offer['departure_day'] = $departure->format('d');
 
-		$offer['cost_rate'] = '$' . $offer['cost'] . __(' USD/NIGHT') . ' | ' . strtoupper($offer['rate_name']) . __(' RATE');
+		$offer['cost_rate'] = '$' . $offer['cost'] . __(' usd/night') . ' | ' . $offer['rate_name'] . __(' rate');
 
 		return $offer;
 	}
