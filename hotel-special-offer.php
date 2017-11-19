@@ -125,29 +125,39 @@ class Hotel_Special_Offer_Widget extends WP_Widget {
 	 * @return array
 	 */
 	private function prepareOffer(array $offer) {
+		$actualOffer = wp_parse_args( $offer, self::getDefaultFormFields() );
 
-		$arrival = DateTime::createFromFormat('Y-m-d', $offer['arrival_date']);
-		$departure = DateTime::createFromFormat('Y-m-d', $offer['departure_date']);
+		$actualOffer['image_url']      = apply_filters( 'hotel_so_image_url', esc_url( $offer['image_url'] ), $offer );
+		$actualOffer['image_alt']      = apply_filters( 'hotel_so_image_alt', esc_attr( $offer['image_alt'] ), $offer );
+		$actualOffer['hotel_name']     = apply_filters( 'hotel_so_hotel_name', $offer['hotel_name'], $offer );
+		$actualOffer['room_name']      = apply_filters( 'hotel_so_room_name', $offer['room_name'], $offer );
+		$actualOffer['rate_name']      = apply_filters( 'hotel_so_rate_name', $offer['rate_name'], $offer );
+		$actualOffer['cost']           = apply_filters( 'hotel_so_cost', $offer['cost'], $offer );
+		$actualOffer['arrival_date']   = apply_filters( 'hotel_so_arrival_date', $offer['arrival_date'], $offer );
+		$actualOffer['departure_date'] = apply_filters( 'hotel_so_departure_date', $offer['departure_date'], $offer );
 
-		$offer['arrival_month'] = __($arrival->format('F'));
-		$offer['arrival_day'] = $arrival->format('d');
-		$offer['departure_month'] = __($departure->format('F'));
-		$offer['departure_day'] = $departure->format('d');
+		$arrival = DateTime::createFromFormat('Y-m-d', $actualOffer['arrival_date']);
+		$departure = DateTime::createFromFormat('Y-m-d', $actualOffer['departure_date']);
 
-		$offer['cost_rate'] = '$' . $offer['cost'] . __(' usd/night') . ' | ' . $offer['rate_name'] . __(' rate');
+		$actualOffer['arrival_month'] = __($arrival->format('F'));
+		$actualOffer['arrival_day'] = $arrival->format('d');
+		$actualOffer['departure_month'] = __($departure->format('F'));
+		$actualOffer['departure_day'] = $departure->format('d');
 
-		return $offer;
+		$actualOffer['cost_rate'] = '$' . $actualOffer['cost'] . __(' usd/night') . ' | ' . $actualOffer['rate_name'] . __(' rate');
+
+		return $actualOffer;
 	}
 
 	/**
 	 * @inheritdoc
 	 */
-	public function form($instance) {
+	public function form( $instance ) {
 
 		// Define default values for variables.
 		$instance = wp_parse_args( (array) $instance, $this->getDefaultFormFields() );
 
-		include( plugin_dir_path( __FILE__ ) . 'views/form.php' );
+		include( $this->getTemplateHierarchy( 'form' ) );
 	}
 
 	/**
@@ -155,7 +165,7 @@ class Hotel_Special_Offer_Widget extends WP_Widget {
 	 *
 	 * @return array default values
 	 */
-	private function getDefaultFormFields() {
+	private static function getDefaultFormFields() {
 		$defaults = array(
 			'image_url' => '',
 			'image_alt' => '',
@@ -192,7 +202,29 @@ class Hotel_Special_Offer_Widget extends WP_Widget {
 	 * @inheritdoc
 	 */
 	public function widget( $args, $instance ) {
-		include( plugin_dir_path( __FILE__ ) . 'views/widget.php' );
+		include( $this->getTemplateHierarchy( 'widget' ) );
+	}
+
+	/**
+	 * Loads theme files in appropriate hierarchy: 1) child theme,
+	 * 2) parent template, 3) plugin resources. will look in the hotel-special-offer widget/
+	 * directory in a theme and the views/ directory in the plugin
+	 *
+	 * @param string $template template file to search for
+	 * @return string template path
+	 */
+
+	public function getTemplateHierarchy( $template ) {
+		$template_slug = rtrim( $template, '.php' );
+		$template      = $template_slug . '.php';
+
+		if ( $theme_file = locate_template( array( $this->slug . '/' . $template ) ) ) {
+			$file = $theme_file;
+		} else {
+			$file = 'views/' . $template;
+		}
+
+		return apply_filters( 'sp_template_hotel_so_' . $template, $file );
 	}
 
 	/**
