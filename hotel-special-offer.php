@@ -48,12 +48,20 @@ class Hotel_Special_Offer_Widget extends WP_Widget {
 	 */
 	private function registerAssets() {
 		// Register admin styles and scripts
-//		add_action( 'admin_print_styles', array( $this, 'register_admin_styles' ) );
-//		add_action( 'admin_enqueue_scripts', array( $this, 'register_admin_scripts' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'registerAdminScripts' ) );
 
 		// Register site styles and scripts
 		add_action( 'wp_enqueue_scripts', array( $this, 'registerWidgetStyles' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'registerWidgetScripts' ) );
+	}
+
+	/**
+	 * Registers and enqueues admin-specific JavaScript.
+	 */
+	public function registerAdminScripts() {
+		wp_enqueue_media();
+		wp_enqueue_script( $this->slug.'-admin-script', plugins_url(
+			'assets/js/admin.js', __FILE__ ), array('jquery') );
 	}
 
 	/**
@@ -77,7 +85,7 @@ class Hotel_Special_Offer_Widget extends WP_Widget {
 	 */
 	private function registerAjaxCallback() {
 		add_action( 'wp_ajax_offer_get_data', array( $this, 'getOffer' ) );
-		add_action( 'wp_ajax_offer_get_data', array( $this, 'getOffer' ) );
+		add_action( 'wp_ajax_nopriv_offer_get_data', array( $this, 'getOffer' ) );
 	}
 
 	/**
@@ -149,6 +157,8 @@ class Hotel_Special_Offer_Widget extends WP_Widget {
 	 */
 	private function getDefaultFormFields() {
 		$defaults = array(
+			'image_url' => '',
+			'image_alt' => '',
 			'hotel_name' => '',
 			'room_name' => '',
 			'rate_name' => '',
@@ -166,6 +176,8 @@ class Hotel_Special_Offer_Widget extends WP_Widget {
 	public function update( $newInstance, $oldInstance ) {
 		$instance = $oldInstance;
 
+		$instance['image_url']      = strip_tags( $newInstance['image_url'] );
+		$instance['image_alt']      = strip_tags( $newInstance['image_alt'] );
 		$instance['hotel_name']     = strip_tags( $newInstance['hotel_name'] );
 		$instance['room_name']      = strip_tags( $newInstance['room_name'] );
 		$instance['rate_name']      = strip_tags( $newInstance['rate_name'] );
@@ -183,4 +195,11 @@ class Hotel_Special_Offer_Widget extends WP_Widget {
 		include( plugin_dir_path( __FILE__ ) . 'views/widget.php' );
 	}
 
+	/**
+	 * @param $instance
+	 * @return bool
+	 */
+	private function hasImage($instance) {
+		return !empty($instance['image_url']);
+	}
 }

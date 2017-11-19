@@ -9,9 +9,9 @@ function Offer(context) {
     this.data = null;
 
     this.loader = this.context.find('.loader');
-    this.table = this.context.find('div table');
+    this.container = this.context.find('.container');
 
-    if (this.table.length == 0 || this.table.loader == 0) {
+    if (this.container.length == 0 || this.container.loader == 0) {
         this.context.hide();
         throw new Error('Special offer context doesn\'t have necessary html blocks');
     }
@@ -55,13 +55,16 @@ Offer.prototype.loadData = function () {
 };
 
 Offer.prototype.render = function (data) {
-    var self = this,
-        $arrival = this.table.find('.arrival'),
-        $departure = this.table.find('.departure');
+    var $arrival = this.container.find('.arrival'),
+        $departure = this.container.find('.departure'),
+        $image = this.container.find('.image img');
 
-    self.table.find('.hotel').text(data['hotel_name'].toUpperCase());
-    self.table.find('.room').text(data['room_name'].toUpperCase());
-    self.table.find('.cost-rate').text(data['cost_rate'].toUpperCase());
+    $image.attr('src', data['image_url']);
+    $image.attr('alt', data['image_alt']);
+
+    this.container.find('.hotel').text(data['hotel_name'].toUpperCase());
+    this.container.find('.room').text(data['room_name'].toUpperCase());
+    this.container.find('.cost-rate').text(data['cost_rate'].toUpperCase());
 
     $arrival.find('.month').text(data['arrival_month'].toUpperCase());
     $arrival.find('.day').text(data['arrival_day']);
@@ -69,7 +72,7 @@ Offer.prototype.render = function (data) {
     $departure.find('.month').text(data['departure_month'].toUpperCase());
     $departure.find('.day').text(data['departure_day']);
 
-    self.table.show();
+    this.container.show();
 };
 
 Offer.prototype.hide = function () {

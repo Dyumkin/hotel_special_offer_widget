@@ -1,3 +1,48 @@
+<p></p>
+<div class="media-widget-control" id="<?php echo $this->id?>">
+	<div class="media-widget-preview media_image">
+		<div onclick="hotelOfferMedia.select('<?php echo $this->id?>')"
+			class="attachment-media-view <?php echo ($this->hasImage($instance)) ? 'selected' : 'not-selected'; ?>">
+
+			<div class="placeholder"><?php esc_html_e('No image selected'); ?></div>
+		</div>
+
+		<?php if ($this->hasImage($instance)): ?>
+			<img src="<?php echo esc_attr( $instance['image_url'] ); ?>"
+			     alt="<?php echo esc_attr( $instance['image_alt'] ); ?>">
+		<?php endif; ?>
+	</div>
+
+	<p class="media-widget-buttons">
+		<button type="button"
+		        class="button delete-offer-media <?php echo ($this->hasImage($instance)) ? 'not-selected' : 'selected'; ?>"
+		        onclick="hotelOfferMedia.remove('<?php echo $this->id?>')"
+		>
+			Delete Image
+		</button>
+		<button type="button"
+		        class="button select-offer-media <?php echo ($this->hasImage($instance)) ? 'selected' : 'not-selected'; ?>"
+		        onclick="hotelOfferMedia.select('<?php echo $this->id?>')"
+		>
+			Add Image
+		</button>
+	</p>
+
+	<input type="hidden"
+	       class="media-url"
+	       id="<?php echo $this->get_field_id( 'image_url' ); ?>"
+	       name="<?php echo $this->get_field_name( 'image_url' ); ?>"
+	       value="<?php echo esc_attr( $instance['image_url'] ); ?>"
+	/>
+
+	<input type="hidden"
+	       class="media-alt"
+	       id="<?php echo $this->get_field_id( 'image_alt' ); ?>"
+	       name="<?php echo $this->get_field_name( 'image_alt' ); ?>"
+	       value="<?php echo esc_attr( $instance['image_alt'] ); ?>"
+	/>
+</div>
+
 <p>
 	<label for="<?php echo $this->get_field_id( 'hotel_name' ); ?>"><?php esc_html_e( 'Hotel Name:' ); ?></label>
 	<input class="widefat" id="<?php echo $this->get_field_id( 'hotel_name' ); ?>"

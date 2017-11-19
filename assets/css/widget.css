@@ -1,88 +1,97 @@
-.hotel-special-offer table{
+.hotel-special-offer .container {
+    text-align: center;
     display: none;
 }
 
-.hotel-special-offer table caption{
+.hotel-special-offer .container .header {
+    margin-bottom: 10px;
+}
+
+.hotel-special-offer .container .header div{
     border: 1px solid #19563d;
     background-color: #19563d;
     color: white;
     font-weight: bold;
-    margin-bottom: 10px;
+    padding: 5px;
 }
 
-.hotel-special-offer table tr {
-    text-align: center;
-    border-bottom: none;
-}
-
-.hotel-special-offer .block {
+.hotel-special-offer .container .block {
     border: 1px solid #19563d;
 }
 
-.hotel-special-offer .block .image {
-    padding: 10px 0 10px 10px;
+.hotel-special-offer .container .block .image,
+.hotel-special-offer .container .block .info{
+    padding: 10px;
 }
 
-.hotel-special-offer .block .info {
-    padding: 10px 10px 10px 0;
+.hotel-special-offer .container .block .info .hotel,
+.hotel-special-offer .container .block .info .room,
+.hotel-special-offer .container .block .info .cost-rate {
     color: #19563d;
 }
 
-.hotel-special-offer .block .info h4 {
+.hotel-special-offer .container .block .info .cost-rate {
     margin-bottom: 10px;
-    color: #19563d;
 }
 
-.hotel-special-offer .block .info h5 {
-    margin-bottom: 5px;
-    color: #19563d;
-}
-
-.hotel-special-offer .block .info td {
-    padding: 0;
-}
-
-.hotel-special-offer .block .arrival fieldset,
-.hotel-special-offer .block .departure fieldset{
+.hotel-special-offer .container .block .arrival fieldset,
+.hotel-special-offer .container .block .departure fieldset{
     width: 110px;
-    height: 100px;
+    height: 90px;
     color: gray;
     border: 2px solid #19563d;
     margin-bottom: 0;
+    margin-left: 10px;
 }
 
-.hotel-special-offer .block .arrival fieldset{
-    float: right;
-}
-
-.hotel-special-offer .block .departure fieldset{
-    float: left;
-}
-
-.hotel-special-offer .block .departure {
-    width: 0;
-    padding-left: 10px !important;
-}
-
-.hotel-special-offer .block .month{
+.hotel-special-offer .container .block .month{
     font-size: 0.7rem;
     margin: 0;
 }
 
-.hotel-special-offer .block .day{
-    font-size: 1.9rem;
+.hotel-special-offer .container .block .day{
+    font-size: 1.5rem;
     margin: 0;
 }
 
-.hotel-special-offer .block .info .book {
+.hotel-special-offer .container .block .book {
     text-align: left;
     vertical-align: bottom;
 }
 
-.hotel-special-offer .block .info .book a {
+.hotel-special-offer .container .block .book,
+.hotel-special-offer .container .block .arrival,
+.hotel-special-offer .container .block .departure
+{
+    display: table-cell;
+}
+
+.hotel-special-offer .container .block .book a {
     color: grey;
     box-shadow: inset 0 -1px 0 grey;
 }
+
+.hotel-special-offer .container .block .table {
+    display: table;
+}
+
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+[class*="col-"] {
+    float: left;
+}
+
+.col-12 {width: 100%;}
+
+.margin-0 {
+    margin: 0;
+}
+
+
 
 .loader,
 .loader:after {
