@@ -71,7 +71,7 @@
 </p>
 
 <p>
-	<label for="<?php echo $this->get_field_id( 'cost' ); ?>"><?php esc_html_e( 'Cost:' ); ?></label>
+	<label for="<?php echo $this->get_field_id( 'cost' ); ?>"><?php esc_html_e( 'Cost (USD):' ); ?></label>
 	<input id="<?php echo $this->get_field_id( 'cost' ); ?>"
 	       name="<?php echo $this->get_field_name( 'cost' ); ?>"
 	       type="number"
@@ -79,7 +79,6 @@
 	       min="0"
 	       step="0.1"
 	/>
-	<span>&#036;</span>
 </p>
 
 <p>

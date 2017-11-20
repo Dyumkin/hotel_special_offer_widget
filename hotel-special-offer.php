@@ -117,7 +117,6 @@ class Hotel_Special_Offer_Widget extends WP_Widget {
 		wp_send_json_error();
 	}
 
-
 	/**
 	 * Preparation of the offer data before sending
 	 *

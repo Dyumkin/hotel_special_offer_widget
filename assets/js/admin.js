@@ -2,6 +2,12 @@ var hotelOfferMedia;
 
 (function ($) {
     hotelOfferMedia = {
+        /**
+         * Open media manager to select the image
+         *
+         * @param {string} widgetId
+         * @returns {boolean}
+         */
         select: function (widgetId) {
             var frame = wp.media({
                 title: 'Choose Image',
@@ -19,6 +25,12 @@ var hotelOfferMedia;
             return false;
         },
 
+        /**
+         * Set data to input and show preview image
+         *
+         * @param {string} widgetId
+         * @param {object} attachment Selected image
+         */
         render: function (widgetId, attachment) {
 
             if (attachment == 'undefined') {
@@ -43,6 +55,11 @@ var hotelOfferMedia;
             hotelOfferMedia.hideSelector(content.selectButton);
         },
 
+        /**
+         * Remove data from input and hide preview
+         *
+         * @param {string} widgetId
+         */
         remove: function (widgetId) {
             var content = hotelOfferMedia.getContent(widgetId);
 
@@ -55,6 +72,12 @@ var hotelOfferMedia;
             hotelOfferMedia.showSelector(content.selectButton);
         },
 
+        /**
+         * Return widget block
+         *
+         * @param {string} widgetId
+         * @returns {{mediaControl: (*|HTMLElement), preview, previewImg: (*|HTMLElement), imageUrl, imageAlt, deleteButton, selectButton}}
+         */
         getContent: function (widgetId) {
             var mediaControl = $('#' + widgetId);
 
@@ -69,10 +92,22 @@ var hotelOfferMedia;
             };
         },
 
+        /**
+         * Return image url
+         *
+         * @param attachment Selected image
+         * @returns {*}
+         */
         getImageSRC: function (attachment) {
             return attachment.sizes.medium.url || attachment.url;
         },
 
+        /**
+         * Show image preview
+         *
+         * @param content
+         * @param attachment Selected image
+         */
         showPreview: function (content, attachment) {
             content.previewImg.attr('src', hotelOfferMedia.getImageSRC(attachment));
             content.previewImg.attr('alt', attachment.alt);
@@ -81,16 +116,31 @@ var hotelOfferMedia;
             content.preview.append(content.previewImg);
         },
 
+        /**
+         * Hide image preview
+         *
+         * @param content
+         */
         hidePreview: function (content) {
             content.preview.children('img').remove();
             hotelOfferMedia.showSelector(content.preview.children('div'));
         },
 
+        /**
+         * Hide HTML block
+         *
+         * @param selector
+         */
         hideSelector: function (selector) {
             selector.removeClass('not-selected');
             selector.addClass('selected');
         },
 
+        /**
+         * Show HTML block
+         *
+         * @param selector
+         */
         showSelector: function (selector) {
             selector.removeClass('selected');
             selector.addClass('not-selected');

@@ -19,6 +19,9 @@ function Offer(context) {
     this.loadData();
 }
 
+/**
+ * Get Special Offer from server via AJAX request and render widget
+ */
 Offer.prototype.loadData = function () {
 
     if (typeof offer_config.ajax_url == 'undefined') {
@@ -54,6 +57,11 @@ Offer.prototype.loadData = function () {
     });
 };
 
+/**
+ * Render the widget on the page
+ *
+ * @param data came from the server
+ */
 Offer.prototype.render = function (data) {
     var $arrival = this.container.find('.arrival'),
         $departure = this.container.find('.departure'),
@@ -75,6 +83,9 @@ Offer.prototype.render = function (data) {
     this.container.show();
 };
 
+/**
+ * Hide widget if something goes wrong
+ */
 Offer.prototype.hide = function () {
     this.context.hide();
 };
